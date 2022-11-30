@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pleo_ticket_tree_view" model="ir.ui.view">
+        <field name="name">pleo.ticket.tree</field>
+        <field name="model">pleo.ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Tickets">
+                <field name="receipt"/>
+<!--                <field name="receipt_type"/>-->
+                <field name="date"/>
+                <field name="amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                <field name="owner"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'pendiente'"
+                       decoration-success="state == 'realizado'"
+                       decoration-danger="state == 'error'"
+                />
+                <field name="company_id" optional="hide"/>
+                <field name="currency_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pleo_ticket_form_view" model="ir.ui.view">
+        <field name="name">pleo.ticket.form</field>
+        <field name="model">pleo.ticket</field>
+        <field name="arch" type="xml">
+            <form string="Ticket">
+                <header>
+<!--                    <button name="process" string="Procesar" type="object" states="pendiente,error" class="oe_highlight"/>-->
+                    <field name="state" widget="statusbar" statusbar_visible="pendiente,error,realizado"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                        <field name="receipt"/>
+<!--                        <field name="receipt_type"/>-->
+                        <field name="date"/>
+                        <field name="text"/>
+                        <field name="amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="tax_code"/>
+                        <field name="tax_percentage"/>
+                        <field name="tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="contra_account"/>
+                        <field name="cif"/>
+                        <field name="document_number"/>
+                        <field name="category"/>
+                        <field name="account_number"/>
+                        <field name="owner"/>
+                        <field name="employee_code"/>
+                        <field name="note"/>
+                        <field name="department"/>
+                        <field name="department_code"/>
+                        <field name="receipt_url" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                        <field name="cliente_tag"/>
+                        <field name="proyecto_tag"/>
+                        <field name="company_id"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="pleo_ticket_filter" model="ir.ui.view">
+        <field name="name">pleo.ticket.search</field>
+        <field name="model">pleo.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Tickets">
+                <field name="receipt" string="Número de Recibo"/>
+<!--                <field name="receipt_type" string="Tipo de Recibo"/>-->
+                <field name="date" string="Fecha de Liquidación"/>
+                <field name="owner" string="Nombre del Empleado"/>
+                <group expand="1" string="Agrupar por">
+<!--                    <filter string="Tipo de Recibo" name="receipt_type" context="{'group_by': 'receipt_type'}"/>-->
+                    <filter string="Estado" name="state" context="{'group_by': 'state'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="pleo_ticket_action" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pleo.ticket</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="pleo_ticket_filter"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Crea el primer ticket!
+            </p><p>
+                Los tickets generados/importados desde Pleo, generan las entradas correspondientes en la contabilidad de Odoo.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_pleo_root" name="Pleo" sequence="1"
+              web_icon="processcontrol_conector_pleo,static/description/icon.png">
+        <menuitem id="menu_pleo" name="Pleo" sequence="1" groups="account.group_account_manager">
+            <menuitem id="menu_pleo_ticket" action="pleo_ticket_action" name="Tickets" sequence="5"/>
+        </menuitem>
+        <menuitem id="menu_pleo_configuration" name="Configuración" sequence="35"
+                  groups="account.group_account_manager">
+            <menuitem id="menu_pleo_config" name="Ajustes" action="action_pleo_config"
+                      groups="base.group_system" sequence="0"/>
+        </menuitem>
+    </menuitem>
+
+</odoo>

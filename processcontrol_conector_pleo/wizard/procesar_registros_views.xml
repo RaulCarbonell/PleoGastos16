@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_wizard_procesar_registros_form" model="ir.ui.view">
+        <field name="name">wizard.procesar_registros.form</field>
+        <field name="model">wizard.procesar_registros</field>
+        <field name="arch" type="xml">
+            <form string="Procesar registros">
+                <sheet>
+                    <field name="notes"/>
+                </sheet>
+                <footer>
+                        <button string="Procesar" data-hotkey="g"
+                                confirm="¿Confirma procesar los registros seleccionados?"
+                                name="process" type="object" class="print btn-primary"/>
+                        <button string="Cancelar" data-hotkey="z"
+                                class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_procesar_registros" model="ir.actions.act_window">
+        <field name="name">Procesar registros</field>
+        <field name="res_model">wizard.procesar_registros</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_wizard_procesar_registros_form"/>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        <field name="binding_model_id" ref="processcontrol_conector_pleo.model_pleo_ticket" />
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

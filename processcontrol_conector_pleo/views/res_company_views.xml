@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_pleo_form" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.pleo</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Pleo">
+                    <group>
+                        <field name="pleo_partner_id"
+                               options="{'no_open': True, 'no_create': True, 'no_quick_create': True, 'no_edit': True}"
+                               domain="[('supplier_rank','>', 0)]"/>
+                        <field name="account_journal_ticket_id"
+                               options="{'no_open': True, 'no_create': True, 'no_quick_create': True, 'no_edit': True}"
+                               domain="[('type','=', 'general')]"/>
+<!--                        <field name="account_journal_bank_id"-->
+<!--                               options="{'no_open': True, 'no_create': True, 'no_quick_create': True, 'no_edit': True}"-->
+<!--                               domain="[('type','=', 'bank')]"/>-->
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

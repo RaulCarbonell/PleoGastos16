@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.pleo</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Pleo" string="Pleo" data-key="processcontrol_conector_pleo" groups="account.group_account_manager">
+                        <h2>Contabilidad</h2>
+                        <div class="row mt16 o_settings_container" name="generic_supplier_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="generic_supplier"
+                                title="Proveedor genérico para registar tickets.">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Proveedor Genérico</span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                    <div class="text-muted">
+                                        Proveedor genérico para registrar tickets sin CIF.
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="Proveedor" for="pleo_partner_id" class="col-lg-3 o_light_label"/>
+                                            <field name="pleo_partner_id"
+                                                   options="{'no_open': True, 'no_create': True, 'no_quick_create': True, 'no_edit': True}"
+                                                   domain="[('supplier_rank','>', 0)]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt16 o_settings_container" name="account_journal_ticket_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                id="account_journal_ticket"
+                                title="Diario contable del tipo Operaciones Varias para registrar tickets sin CIF.">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Diario Contable Operaciones Varias</span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                    <div class="text-muted">
+                                        Diario contable del tipo Operaciones Varias para registrar tickets sin CIF.
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="Diario Contable" for="account_journal_ticket_id" class="col-lg-3 o_light_label"/>
+                                            <field name="account_journal_ticket_id"
+                                                   options="{'no_open': True, 'no_create': True, 'no_quick_create': True, 'no_edit': True}"
+                                                   domain="[('type','=', 'general')]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            <div class="col-12 col-lg-6 o_setting_box"-->
+<!--                                 id="account_journal_bank"-->
+<!--                                 title="Diario contable del tipo Banco para registrar tickets sin CIF.">-->
+<!--                                <div class="o_setting_left_pane"/>-->
+<!--                                <div class="o_setting_right_pane">-->
+<!--                                    <span class="o_form_label">Diario Contable Bancos</span>-->
+<!--                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>-->
+<!--                                    <div class="text-muted">-->
+<!--                                        Diario contable del tipo Banco para registrar tickets sin CIF.-->
+<!--                                    </div>-->
+<!--                                    <div class="content-group">-->
+<!--                                        <div class="row mt16">-->
+<!--                                            <label string="Diario Contable" for="account_journal_bank_id" class="col-lg-3 o_light_label"/>-->
+<!--                                            <field name="account_journal_bank_id"-->
+<!--                                                   options="{'no_open': True, 'no_create': True, 'no_quick_create': True, 'no_edit': True}"-->
+<!--                                                   domain="[('type','=', 'bank')]"/>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>                        
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_pleo_config" model="ir.actions.act_window">
+            <field name="name">Configuración</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'processcontrol_conector_pleo', 'bin_size': False}</field>
+        </record>
+
+    </data>
+</odoo>

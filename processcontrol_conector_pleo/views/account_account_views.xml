@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_account_pleo_list" model="ir.ui.view">
+        <field name="name">account.account.pleo.list</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list"/>
+        <field name="arch" type="xml">
+            <field name="reconcile" position="after">
+                <field name="is_pocket_account" widget="boolean_toggle"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_pleo_form" model="ir.ui.view">
+        <field name="name">account.account.pleo.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <field name="group_id" position="after">
+                <field name="is_pocket_account"/>
+            </field>
+        </field>
+    </record>
+</odoo>

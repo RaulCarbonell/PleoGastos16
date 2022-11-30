@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pleo_ticket_group_account_manager,access_pleo_ticket_group_account_manager,model_pleo_ticket,account.group_account_manager,1,1,1,1
+access_wizard_procesar_registros_group_account_manager,access_wizard_procesar_registros_group_account_manager,model_wizard_procesar_registros,account.group_account_manager,1,1,1,1
+access_account_analytic_tag_account_manager,account.analytic.tag.account.manager,analytic.model_account_analytic_tag,account.group_account_manager,1,0,0,0
